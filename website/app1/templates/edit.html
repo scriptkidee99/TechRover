@@ -1,0 +1,101 @@
+<!-- edit 2 -->
+<html>
+{% load static %}
+
+<head>
+
+    <title>Tech Rover</title>
+
+    <link rel="stylesheet" href="{% static 'style4.css' %}" type="text/css">
+    <script src="{% static 'jquery.js' %}"></script>
+    <script src="{% static 'script4.js' %}"></script>
+
+
+
+</head>
+
+<body>
+
+
+
+    <div id="header" width="700" height="500">
+
+        <!-- <img src="menu.png" class="menu_button"> -->
+
+        <div class="menu_button" onclick="myFunction(this)">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+
+
+
+        <div id="menu_bar"></div>
+
+
+
+
+        <a href="/edit/" style="text-decoration: none; color:red;"><h2 id="namePlate">Tech Rover</h2></a>
+        <!-- <img id="namePlate" src="../sources/images/logo.png"> -->
+
+         
+
+        <input type="search" id="search" size="30" height="50" placeholder="Search..">
+
+        <input type="button" id="profileEdit" value="ADM">
+
+    </div>
+
+    <div id="wall">
+        <div id="profile_menu">
+            <h2 id="profile_menu_title">Hi, ADMIN</h2>
+            <hr id="profile_divider">
+            <input type="button" id="settings_button" class="profile_menu_item" value="Settings">
+            <input type="button" id="logInButton" class="profile_menu_item" value="LogOut">
+        </div>
+        <form action="/new/" method="GET">
+        <input type="submit" value="New Blog" class="newBlogButton">
+        <br><br>
+        </form>
+        <span id="userState">check</span>
+        <form id="logOutForm" action="/" method="POST" >{% csrf_token %}
+            <input type="hidden" name="logOutValue" value="out">
+        }
+        </form>
+
+        <!-- <div id="screen"> -->
+            <br><br>
+        <div class="rowEdit">
+                {% for i in blog %}
+                <form class="cardEdit" action="/editor/" method="GET">
+
+                    <img class="card_image" src="{{i.show_img}}">
+
+
+
+                    <div class="card_title">
+
+                        <!-- Mozilla Firefox Will Soon Let You Set a Separate Search Engine for Private Windows -->
+                        {{i.title}}
+
+                    </div>
+
+                    <input type="hidden" class="loadBlogButton" id="subf" name="key" value="{{i.key}}">
+
+
+                </form>
+
+                {% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last %}
+            </div>
+            <div class="rowEdit">
+
+                {% endif %} {% endfor %}
+            </div>
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>

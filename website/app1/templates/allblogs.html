@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>All</title>
+	<style type="text/css">
+		table{
+			margin:auto;
+			font-size:20px;
+		}
+		table,tr,td,th{
+			border:3px black solid;
+			border-collapse: collapse;
+		}
+
+	</style>
+</head>
+<body>
+	<table>
+		<tr>
+			<th>Key</th>
+			<th>Title</th>
+			<th>Show</th>
+			<th>Full</th>
+		</tr>
+	{% for blog in blogs %}
+		<tr>
+			<td>{{blog.key}}</td>
+			<td>{{blog.title}}</td>
+			<td><a href="{{blog.show_img}}">{{blog.show_img}}</a></td>
+			<td><a href="{{blog.full_img}}">{{blog.full_img}}</a></td>
+		</tr>
+	{% endfor %}
+</table>
+</body>
+</html>

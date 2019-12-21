@@ -1,0 +1,97 @@
+<!-- Load newBlog 4 -->
+<html>
+{% load static %}
+
+<head>
+    <title>Blog</title>
+
+    <link rel="stylesheet" href="{% static 'style4.css' %}" type="text/css">
+    <script src="{% static 'jquery.js' %}"></script>
+    <script src="{% static 'script4.js' %}"></script>
+
+
+</head>
+
+<body>
+    <div id="header" width="700" height="500">
+
+        <!-- <img src="menu.png" class="menu_button"> -->
+
+        <div class="menu_button" onclick="myFunction(this)">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+
+
+
+        <div id="menu_bar"></div>
+
+
+
+
+        <a href="/edit/" style="text-decoration: none; color:red;"><h2 id="namePlate">Tech Rover</h2></a>
+        <!-- <img id="namePlate" src="../sources/images/logo.png"> -->
+
+        <input type="search" id="search" size="30" height="50" placeholder="Search..">
+
+        <input type="button" id="profileEdit" value="ADM" onclick="show_profile()">
+
+    </div>
+
+
+    <div id="wall">
+        <div id="profile_menu">
+            <h2 id="profile_menu_title">Hi, ADMIN</h2>
+            <hr id="profile_divider">
+            <input type="button" id="settings_button" class="profile_menu_item" value="Settings">
+            <input type="button" id="logInButton" class="profile_menu_item" value="LogOut">
+        </div>
+        <span id="userState">check</span>
+        <form id="logOutForm" action="/" method="POST" >{% csrf_token %}
+            <input type="hidden" name="logOutValue" value="out">
+        }
+        </form>
+        <form class="blog" action="/edit/" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+
+            <table style="padding:auto;margin:auto">
+                <tr>
+                    <td>
+                        <div class="filePicker" style="margin-right:50px;">
+                            <label for="idactualPicker" class="showPickerInfo" title="width=300px height=200px" >Upload
+                                show image</label>
+                            <input type="file" class="actualPicker" placeholder="Browse" id="idactualPicker" name="showPicker" value="{{simg}}">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="filePicker" style="margin-left:50px;">
+                            <label for="idactualFullPicker" class="showPickerInfo" title="width=300px height=200px">Upload full image</label>
+                            <input type="file" class="actualPicker" placeholder="Browse" id="idactualPicker" name="fullPicker" value="{{fimg}}">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <!-- <img class="blog_img" src="{% static 'sources/images/bimg_full.jpg' %}"> -->
+            <input type='file' name='showimg' class="fullImgPicker" style="display:none">
+
+
+            <div class="blog_content">
+                <div class="blog_title">
+                    <textarea class="titleEdit" placeholder="Blog Title" name="blogTitle">{{title}}</textarea>
+                </div>
+                <textarea class="blogEdit" name="blogContent" placeholder="Blog Content">
+                    {{content}}
+                </textarea>
+            </div>
+            <input type="hidden" name="key" value="{{key}}">
+            
+            <input type="submit" name='oldBlog' value="Save" id="saveButton">
+            <input type="submit" name='oldBlog' value="Delete" id="deleteButton">
+
+        </form>
+
+        
+    </div>
+</body>
+
+</html>

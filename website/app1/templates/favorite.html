@@ -1,0 +1,132 @@
+<!-- Load index 2 -->
+<html>
+{% load static %}
+
+<head>
+
+    <title>Tech Rover</title>
+
+    <link rel="stylesheet" href="{% static 'style4.css' %}" type="text/css">
+    <script src="{% static 'jquery.js' %}"></script>
+    <!-- <script src="{% static 'scriptNew.js' %}"></script> -->
+    <script type="text/javascript" src="{% static 'script4.js' %}"></script>
+
+ 
+
+</head>
+
+<body>
+
+
+    <div class="sign">
+        <span class="signCloseButton">X</span>
+
+        <div class="signContent">
+
+            <input type="radio" class="signSelectButton" id="logIn" name="signSelect" onclick="checkToLoad()"> <label for="logIn" class="radioText">Log In</label>
+            <input type="radio" class="signSelectButton" id="signUp" name="signSelect" onclick="checkToLoad()"><label for="signUp" class="radioText">Sign Up</label>
+
+            <form id="logInContent" action="/" method="POST"> {% csrf_token %}
+                <input type="email" id="unameBox" class="signInput" placeholder="Email" name='logEmail'> <br>
+                <input type="password" id="passBox" class="signInput" placeholder="Password" name='logPasswd'> <br>
+                <input type="submit" class="signSubmitButton" name="logInButton" value="Log In" class="signInput">
+                <input type="hidden" name="signButton" value="logIn">
+            </form>
+            <form id="signUpContent" action='/' method="POST"> {% csrf_token %}
+                <input type="text" id="fNameBox" class="signInput" placeholder="First Name" name="fname"> <br>
+                <input type="text" id="lNameBox" class="signInput" placeholder="Last Name" name="lname"> <br>
+                <input type="email" id="unameBox" class="signInput" placeholder="Email" name='signEmail'> <br>
+                <input type="password" id="passBox" class="signInput" placeholder="Password" name="signPasswd"> <br>
+                <input type="submit" class="signSubmitButton" value="Sign Up">
+                <input type="hidden" name="signButton" value="signUp">
+            </form>
+
+            <span id="userState">{{userState}}</span>
+
+        </div>
+
+    </div>
+
+    <div id="header" width="700" height="500">
+
+        <!-- <img src="menu.png" class="menu_button"> -->
+
+        <div class="menu_button" onclick="myFunction(this)">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+
+
+
+        
+        <div id="menu_bar" >
+                <a id="homeButton" class="mbcontent" value="home" href="/">Home</a>
+                <button id="savedButton" class="mbcontent" value="sav" href="/favorite/" >Saved</button>
+                <a id="abtButton" class="mbcontent" value="abts" >About Us</a>
+        </div>
+
+
+
+
+        <a href="/" style="text-decoration: none; color:red;"><h2 id="namePlate">Tech Rover</h2></a>
+        <!-- <img id="namePlate" src="../sources/images/logo.png"> -->
+
+        <input type="search" id="search" size="30" height="50" placeholder="Search..">
+
+        <input type="button" id="profile" value={{userInitials}}>
+
+    </div>
+
+    <div id="wall">
+        <form id="profile_menu" action="" method="POST">
+            <h2 id="profile_menu_title">Hi, {{userName}}</h2>
+            <hr id="profile_divider">
+            <input type="button" id="savedButton" class="profile_menu_item" value="Saved">
+            <input type="button" id="logInButton" class="profile_menu_item" value={{logState}}>
+        </form>
+
+        <form id="logOutForm" action="/" method="POST" >{% csrf_token %}
+            <input type="hidden" name="logOutValue" value="out">
+        }
+        </form>
+
+
+        <div id="screen">
+
+
+            <div class="row">
+                {% for i in blog %}
+                <form class="card" action="/blog/" method="GET">
+
+                    <img class="card_image" src="{{i.show_img}}">
+
+
+
+                    <div class="card_title">
+
+                        <!-- Mozilla Firefox Will Soon Let You Set a Separate Search Engine for Private Windows -->
+                        {{i.title}}
+
+                    </div>
+
+                    <input type="hidden" class="loadBlogButton" id="subf" name="key" value="{{i.key}}">
+
+
+                </form>
+
+                {% if forloop.counter|divisibleby:3 and forloop.counter > 0 and not forloop.last %}
+            </div>
+            <div class="row">
+
+                {% endif %} {% endfor %}
+            </div>
+
+        </div>
+    </div>
+
+
+</body>
+
+
+</html>
